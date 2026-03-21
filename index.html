@@ -253,7 +253,7 @@ input[type='file'] {
         <h2>Česta pitanja</h2>
         <ul>
             <li>Koji uzrast dece može da trenira u OLEE?<p>Uzrasti od 4 do 12 godina.</p></li>
-            <li>Da li je potrebna sportska oprema?<p>Potrebne su majica, šorts i patike za salu.</p></li>
+            <li>Da li je potrebna sportska oprema?<p>Ne, dovoljno je udobno odelo i patike.</p></li>
             <li>Koliko traju treninzi?<p>45–60 minuta, u zavisnosti od uzrasta.</p></li>
             <li>Mogu li deca probati pre upisa?<p>Da, Olee nudi probni čas kako bi deca i roditelji videli kako to funkcioniše.</p></li>
         </ul>
@@ -299,7 +299,7 @@ input[type='file'] {
             <h2>Komentari</h2>
             <noscript>
                 <style>
-    #name, #comment, button {
+    #name, #comment, button, #warning {
       display: none;
     }
   </style>
@@ -315,7 +315,7 @@ input[type='file'] {
     ⚠️ Da biste koristili komentare, uključite JavaScript.
             </div>
             </noscript>
-            <p id="comment" style="color: red; font-weight: bold; border: 1px solid #ccc; border-radius: 10px; padding: 10px;">Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da izbrišete!</p>
+            <p id="warning" style="color: red; font-weight: bold; border: 1px solid #ccc; border-radius: 10px; padding: 10px;">Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da izbrišete!</p>
             <input type="text" id="name" placeholder="Vaše ime ovde">
             <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
             <button onclick="addComment()">Pošalji</button>
@@ -332,7 +332,7 @@ input[type='file'] {
         document.getElementById("year").textContent = new Date().getFullYear();
         
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 5) {
+            if (window.scrollY > 10) {
                 navBar.classList.remove('normal');
                 navBar.classList.add('small');
                 logo.classList.remove('normalLogo');
