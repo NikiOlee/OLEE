@@ -98,12 +98,13 @@ input[type='file'] {
         .parent {
             display: flex;
             justify-content: center;
+            padding: 0 10px; /* симметричный отступ */
         }
         .normal {
             width: 100%;
             position: fixed;
             background-image: linear-gradient(to right, orange, #FFBF00);
-            padding: 15px 30px;
+            padding: 15px 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .small {
@@ -117,7 +118,10 @@ input[type='file'] {
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            transition: all 0.2s ease-out;
+            transition: padding 0.2s ease, background 0.3s ease;
+        }
+        .OLEElogo {
+            transition: max-width 0.2s ease;
         }
         .OLEElogo.normalLogo {
             width: auto;
@@ -134,6 +138,8 @@ input[type='file'] {
             font-size: 40px;
             font-weight: bold;
             color: white;
+            transition: opacity 0.3s ease;
+            margin-left: 15px;
         }
         footer {
             background-color: rgba(0, 0, 0, 0.7);
@@ -151,7 +157,7 @@ input[type='file'] {
             max-width: 1000px;
             background-color: rgb(230, 230, 230);
             min-height: calc(100vh - 155px);
-            margin: 135px 70px 20px 10px;
+            margin: 135px 60px 20px 10px;
             padding: 10px;
             border-radius: 25px;
         }
@@ -225,13 +231,12 @@ input[type='file'] {
             margin-top: 10px; 
             border-radius: 10px; 
         }
-
     </style>
 </head>
 <body>
-    <header>
+    <header class="normal">
         <h1>OLEE</h1>
-        <img class="OLEElogo" src="OLEElogo.png" alt="OLEE logo">
+        <img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo">
     </header>
     <div class="parent">
     <div class="main">
@@ -263,6 +268,24 @@ input[type='file'] {
         </div>
         <div class="block">
         <h2>Gde je Olee</h2>
+        <noscript>
+                <style>
+    #name, #comment, button {
+      display: none;
+    }
+  </style>
+
+            <div style="
+                background: #ffe0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+    ">
+    ⚠️ Da biste koristili kartu, uključite JavaScript.
+            </div>
+            </noscript>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d702.1823318115811!2d19.825220296812343!3d45.253265930423254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b10487b3ed313%3A0x47102eb2f593e4bd!2sNovosadskog%20sajma%2037%2C%20Novi%20Sad%2021000!5e0!3m2!1sen!2srs!4v1773589258866!5m2!1sen!2srs" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="block">
@@ -271,21 +294,36 @@ input[type='file'] {
         </div>
         <div class="block" id="comments-section">
             <h2>Komentari</h2>
+            <noscript>
+                <style>
+    #name, #comment, button {
+      display: none;
+    }
+  </style>
+
+            <div style="
+                background: #ffe0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+    ">
+    ⚠️ Da biste koristili komentare, uključite JavaScript.
+            </div>
+            </noscript>
             <input type="text" id="name" placeholder="Vaše ime ovde">
             <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
-            <button onclick="addComment()">Pošalji (Nećete moći da izbrišete. Proverite ono što ste napisali dva puta!)</button>
+            <button onclick="addComment()">Pošalji</button>
             <div id="comments-list"></div>
         </div>
     </div>
     </div>
-    <footer>© <span id="year"></span> OLEE – Informativna stranica. Ova stranica nije zvanični sajt sportskog kluba OLEE.</footer>
+    <footer>© <span id="year">2026</span> OLEE – Informativna stranica. Ova stranica nije zvanični sajt sportskog kluba OLEE.</footer>
     <script>
         const navBar = document.querySelector('header');
         const title = document.querySelector('h1');
-        const logo = document.querySelector('.OLEElogo')
-
-        navBar.classList.add('normal');
-        logo.classList.add('normalLogo');
+        const logo = document.querySelector('.OLEElogo');
 
         document.getElementById("year").textContent = new Date().getFullYear();
         
