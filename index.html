@@ -98,7 +98,7 @@ input[type='file'] {
         .parent {
             display: flex;
             justify-content: center;
-            padding: 0 10px; /* симметричный отступ */
+            padding: 0 10px;
         }
         .normal {
             width: 100%;
@@ -253,7 +253,7 @@ input[type='file'] {
         <h2>Česta pitanja</h2>
         <ul>
             <li>Koji uzrast dece može da trenira u OLEE?<p>Uzrasti od 4 do 12 godina.</p></li>
-            <li>Da li je potrebna sportska oprema?<p>Potrebne su majica i šorc.</p></li>
+            <li>Da li je potrebna sportska oprema?<p>Potrebne su majica, šorts i patike za salu.</p></li>
             <li>Koliko traju treninzi?<p>45–60 minuta, u zavisnosti od uzrasta.</p></li>
             <li>Mogu li deca probati pre upisa?<p>Da, Olee nudi probni čas kako bi deca i roditelji videli kako to funkcioniše.</p></li>
         </ul>
@@ -266,12 +266,15 @@ input[type='file'] {
         <img src="Trener.png" alt="Trener">
         </div>
         </div>
-        <div class="block">
+        <div class="block map">
         <h2>Gde je Olee</h2>
         <noscript>
                 <style>
     #name, #comment, button {
       display: none;
+    }
+    .map {
+        height: auto;
     }
   </style>
 
@@ -312,6 +315,7 @@ input[type='file'] {
     ⚠️ Da biste koristili komentare, uključite JavaScript.
             </div>
             </noscript>
+            <p id="comment" style="color: red; font-weight: bold; border: 1px solid #ccc; border-radius: 10px; padding: 10px;">Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da izbrišete!</p>
             <input type="text" id="name" placeholder="Vaše ime ovde">
             <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
             <button onclick="addComment()">Pošalji</button>
