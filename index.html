@@ -6,7 +6,6 @@
     <title>OLEE</title>
     <link rel="shortcut icon" href="OLEElogo.png" type="image/x-icon">
     <style>
-        /* Reset and base styles  */
 * {
 	padding: 0px;
 	margin: 0px;
@@ -19,8 +18,6 @@
 	box-sizing: border-box;
 }
 
-/* Links */
-
 a, a:link, a:visited  {
     text-decoration: none;
 }
@@ -28,8 +25,6 @@ a, a:link, a:visited  {
 a:hover  {
     text-decoration: none;
 }
-
-/* Common */
 
 aside, nav, footer, header, section, main {
 	display: block;
@@ -52,8 +47,6 @@ img, svg {
 address {
   font-style: normal;
 }
-
-/* Form */
 
 input, textarea, button, select {
 	font-family: inherit;
@@ -94,7 +87,7 @@ legend {
 input[type='file'] {
 	max-width: 100%;
 }
-/*------------------------------------------------------------------------------------------------*/
+		/*--------------------------------------------------------*/
         .parent {
             display: flex;
             justify-content: center;
@@ -231,6 +224,14 @@ input[type='file'] {
             margin-top: 10px; 
             border-radius: 10px; 
         }
+        #load-more-btn {
+            display: none;
+            margin: 20px auto;
+            background-color: #FFBF00;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -277,15 +278,7 @@ input[type='file'] {
         height: auto;
     }
   </style>
-
-            <div style="
-                background: #ffe0e0;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 10px;
-            text-align: center;
-            font-weight: bold;
-    ">
+            <div style="background: #ffe0e0; padding: 15px; border-radius: 10px; margin-top: 10px; text-align: center; font-weight: bold;">
     ⚠️ Da biste koristili kartu, uključite JavaScript.
             </div>
             </noscript>
@@ -303,23 +296,16 @@ input[type='file'] {
       display: none;
     }
   </style>
-
-            <div style="
-                background: #ffe0e0;
-            	padding: 15px;
-            	border-radius: 10px;
-            	margin-top: 10px;
-            	text-align: center;
-            	font-weight: bold;
-    ">
+            <div style="background: #ffe0e0; padding: 15px; border-radius: 10px; margin-top: 10px; text-align: center; font-weight: bold;">
     ⚠️ Da biste koristili komentare, uključite JavaScript.
             </div>
             </noscript>
-            <p id="warning" style="color: red; font-weight: bold; border: 1px solid #ccc; border-radius: 10px; padding: 10px;">Važno! Proverite ono što ste napisali i ime 2 puta jer nećete moći da izbrišete!</p>
+            <p id="warning" style="color: red; font-weight: bold; border: 1px solid #ccc; border-radius: 10px; padding: 10px;">Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da izbrišete!</p>
             <input type="text" id="name" placeholder="Vaše ime ovde">
             <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
             <button onclick="addComment()">Pošalji</button>
             <div id="comments-list"></div>
+            <button id="load-more-btn" onclick="loadMoreComments()">Prikaži još komentara</button>
         </div>
     </div>
     </div>
@@ -350,7 +336,7 @@ input[type='file'] {
     </script>
     <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_PDnKHsYiHlATENt1twFQdcHd0m6Ib_U",
@@ -364,22 +350,39 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const commentsCol = collection(db, "comments");
+let lastDoc = null;
 
-async function loadComments() {
-    const q = query(collection(db, "comments"), orderBy("date", "desc"));
-    const querySnapshot = await getDocs(q);
+async function loadComments(isMore = false) {
+    let q;
+    if (isMore && lastDoc) {
+        q = query(commentsCol, orderBy("date", "desc"), startAfter(lastDoc), limit(5));
+    } else {
+        document.getElementById("comments-list").innerHTML = "";
+        q = query(commentsCol, orderBy("date", "desc"), limit(5));
+    }
 
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+        document.getElementById("load-more-btn").style.display = "none";
+        return;
+    }
+
+    lastDoc = snapshot.docs[snapshot.docs.length - 1];
     const list = document.getElementById("comments-list");
-    list.innerHTML = "";
 
-    querySnapshot.forEach((doc) => {
+    snapshot.forEach((doc) => {
         const data = doc.data();
         const div = document.createElement("div");
         div.className = "comment";
         div.innerHTML = "<strong>" + data.name + ":</strong><br>" + data.text;
         list.appendChild(div);
     });
+
+    document.getElementById("load-more-btn").style.display = snapshot.docs.length < 5 ? "none" : "block";
 }
+
+window.loadMoreComments = () => loadComments(true);
 
 window.addComment = async function() {
     const name = document.getElementById("name").value;
@@ -390,7 +393,7 @@ window.addComment = async function() {
         return;
     }
 
-    await addDoc(collection(db, "comments"), {
+    await addDoc(commentsCol, {
         name: name,
         text: text,
         date: Date.now()
@@ -398,7 +401,7 @@ window.addComment = async function() {
 
     document.getElementById("name").value = "";
     document.getElementById("comment").value = "";
-
+    lastDoc = null;
     loadComments();
 }
 
