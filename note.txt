@@ -1,5 +1,4 @@
-Add more :hover animations.
-Add more animations.
+Add interesting background.
 Add develop news.
 
 Please write your ideas in the comments on the website.
