@@ -106,6 +106,9 @@
         max-width: 100%;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         background-color: white;
       }
@@ -128,6 +131,7 @@
         padding: 15px 10px;
       }
       header {
+        height: 110px !important;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -137,7 +141,11 @@
           background 0.3s ease;
       }
       .OLEElogo {
-        transition: max-width 0.2s ease;
+        z-index: 9999;
+        transition:
+          max-width 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
       .OLEElogo.normalLogo {
         width: auto;
@@ -148,6 +156,12 @@
       .OLEElogo.smallLogo {
         width: auto;
         max-width: 50px;
+      }
+      .OLEElogo.normalLogo:hover {
+        max-width: 90px !important;
+      }
+      .OLEElogo.smallLogo:hover {
+        max-width: 56.25px;
       }
       h1 {
         font-family: Arial, sans-serif;
@@ -196,7 +210,7 @@
           box-shadow 0.2s ease;
       }
       .block:hover {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       }
       ul {
@@ -228,6 +242,14 @@
         max-width: 300px;
         object-fit: cover;
         border-radius: 10px;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        border: 1px solid #ccc;
+      }
+      .gallery img:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       }
       #comments-section {
         max-width: 600px;
@@ -298,12 +320,25 @@
         width: 25px !important;
         margin: 0px 10px 0px 0px !important;
       }
+      iframe {
+        border-radius: 10px;
+        border: 1px solid #ccc !important;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      iframe:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
     </style>
   </head>
-  <body>
+  <body id="header">
     <header class="normal">
       <h1>OLEE</h1>
-      <img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo" />
+      <a href="#header"
+        ><img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo"
+      /></a>
     </header>
     <div class="parent">
       <div class="main">
@@ -423,7 +458,7 @@
             Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da
             izbrišete!
           </p>
-          <input type="text" id="name" placeholder="Vaše ime ovde" />
+          <input type="text" id="name" placeholder="Vaše ime ovде" />
           <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
           <button onclick="addComment()">
             <img class="imgBtn" src="OLEElogo.png" alt="OLEElogo" />
