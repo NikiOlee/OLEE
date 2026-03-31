@@ -423,7 +423,7 @@
             Važno! Proverite on što ste napisali i ime 2 puta jer nećete moći da
             izbrišete!
           </p>
-          <input type="text" id="name" placeholder="Vaše ime ovde" />
+          <input type="text" id="name" placeholder="Vaše ime ovде" />
           <textarea id="comment" placeholder="Vaš komentar ovde"></textarea>
           <button onclick="addComment()">
             <img class="imgBtn" src="OLEElogo.png" alt="OLEElogo" />
@@ -518,7 +518,14 @@
           const data = doc.data();
           const div = document.createElement("div");
           div.className = "comment";
-          div.innerHTML = "<strong>" + data.name + ":</strong><br>" + data.text;
+
+          const dateString = new Date(data.date).toLocaleString();
+
+          div.innerHTML = `
+            <strong>${data.name}:</strong> 
+            <small style="color: gray; margin-left: 10px;">${dateString}</small>
+            <br>${data.text}
+          `;
           list.appendChild(div);
         });
 
