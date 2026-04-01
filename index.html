@@ -359,6 +359,28 @@
           width: 30px;
         }
       }
+      .news-item {
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 10px 0;
+        font: Arial;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .news-item:last-child {
+        border-bottom: 1px solid #eee;
+      }
+      .news-title {
+        font-weight: bold;
+        color: #ffbf00;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+      .news-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
     </style>
   </head>
   <body id="header">
@@ -585,6 +607,10 @@
             Prikaži još komentara
           </button>
         </div>
+        <div class="block">
+          <h2>Vesti sajta</h2>
+          <div id="news-container"></div>
+        </div>
       </div>
     </div>
     <footer>
@@ -717,6 +743,53 @@
       };
 
       loadComments();
+
+      const newsConfig = {
+        apiKey: "AIzaSyDHlQXwjcJCJJmFYdvbUOxWg2D-jUX8SVI",
+        authDomain: "olee-develop-news.firebaseapp.com",
+        projectId: "olee-develop-news",
+        storageBucket: "olee-develop-news.firebasestorage.app",
+        messagingSenderId: "29848889533",
+        appId: "1:29848889533:web:d967fe922c8fc890f62fd4",
+        measurementId: "G-25TFCFQEZQ",
+      };
+
+      import {
+        getFirestore as getNewsStore,
+        collection as newsCol,
+        getDocs as getNewsDocs,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const newsApp = initializeApp(newsConfig, "newsApp");
+      const newsDb = getNewsStore(newsApp);
+
+      async function displayNews() {
+        const container = document.getElementById("news-container");
+        try {
+          const snapshot = await getNewsDocs(newsCol(newsDb, "news"));
+          container.innerHTML = "";
+
+          if (snapshot.empty) {
+            container.innerHTML = "<p>Trenutno nema vesti.</p>";
+            return;
+          }
+
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            const newsDiv = document.createElement("div");
+            newsDiv.className = "news-item";
+            newsDiv.innerHTML = `
+        <div class="news-title">${data.title || "Naslov"}</div>
+        <p>${data.text || "Tekst vesti..."}</p>
+      `;
+            container.appendChild(newsDiv);
+          });
+        } catch (error) {
+          container.innerHTML = "<p>Greška pri učitavanju vesti.</p>";
+        }
+      }
+
+      displayNews();
     </script>
   </body>
 </html>
