@@ -111,6 +111,7 @@
       }
       body {
         background-color: white;
+        overflow-x: hidden;
       }
       .parent {
         display: flex;
@@ -177,6 +178,9 @@
         width: 100%;
         padding: 10px;
         text-align: center;
+        position: relative;
+        z-index: 10;
+        background-color: rgb(40, 40, 40);
       }
       .main {
         color: black;
@@ -190,6 +194,8 @@
         margin: 135px 60px 20px 10px;
         padding: 10px;
         border-radius: 25px;
+        position: relative;
+        z-index: 2;
       }
       h2 {
         font-family: Arial, sans-serif;
@@ -331,9 +337,119 @@
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       }
+
+      .parallax-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .flying-logo {
+        position: absolute;
+        width: 80px;
+        opacity: 0.15;
+        will-change: transform;
+      }
+      @media (max-width: 1030px) {
+        .flying-logo {
+          width: 30px;
+        }
+      }
     </style>
   </head>
   <body id="header">
+    <div class="parallax-bg">
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 20%; left: 0%; transform: rotateZ(30deg)"
+        data-speed="0.1"
+        data-rotation="30"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 40%; right: 5%; transform: rotateZ(80deg)"
+        data-speed="0.1"
+        data-rotation="80"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 60%; left: 0%; transform: rotateZ(-50deg)"
+        data-speed="0.1"
+        data-rotation="-50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 80%; right: 2%; transform: rotateZ(0deg)"
+        data-speed="0.1"
+        data-rotation="0"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 100%; left: 0%; transform: rotateZ(180deg)"
+        data-speed="0.1"
+        data-rotation="180"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 120%; right: 5%; transform: rotateZ(10deg)"
+        data-speed="0.1"
+        data-rotation="10"
+      />
+      <!----------------------------------------->
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 140%; left: 0%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 160%; right: 5%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 180%; left: 0%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 200%; right: 2%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 220%; left: 0%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 240%; right: 5%; transform: rotateZ(50deg)"
+        data-speed="0.1"
+        data-rotation="50"
+      />
+    </div>
+
     <header class="normal">
       <h1>OLEE</h1>
       <a href="#header"
@@ -371,7 +487,7 @@
             </li>
             <li>
               Koliko traju treninzi?
-              <p>45–60 minuta, u zavisnosti od uzrasta.</p>
+              <p>45–60 minuta, u zavisnosti od uzрasta.</p>
             </li>
             <li>
               Mogu li deca probati pre upisa?
@@ -472,8 +588,8 @@
       </div>
     </div>
     <footer>
-      © <span id="year">2026</span> OLEE – Informativna stranica. Ova stranica
-      nije zvanični sajt sportskog kluba OLEE.
+      © <span id="year"></span> OLEE – Informativna stranica. Ova stranica nije
+      zvanični sajt sportskog kluba OLEE.
     </footer>
     <script>
       const navBar = document.querySelector("header");
@@ -496,6 +612,15 @@
           logo.classList.add("normalLogo");
           title.textContent = "OLEE";
         }
+
+        const logos = document.querySelectorAll(".flying-logo");
+        logos.forEach((item) => {
+          const speed = item.getAttribute("data-speed");
+          const rotation = item.getAttribute("data-rotation") || 0;
+          const yPos = -(window.scrollY * speed);
+
+          item.style.transform = `translateY(${yPos}px) rotateZ(${rotation}deg)`;
+        });
       });
     </script>
     <script type="module">
@@ -557,7 +682,7 @@
           const dateString = new Date(data.date).toLocaleString();
 
           div.innerHTML = `
-            <strong>${data.name}:</strong> 
+            <strong>${data.name}:</strong>
             <small style="color: gray; margin-left: 10px;">${dateString}</small>
             <br>${data.text}
           `;
