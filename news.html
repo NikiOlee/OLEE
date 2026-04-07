@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sve OLEE Vesti</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #ffbf00;
+        padding: 20px;
+      }
+      .card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 5px solid #333;
+      }
+      .date {
+        font-size: 11px;
+        color: #666;
+      }
+      h2 {
+        margin: 5px 0;
+        color: #ffbf00;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" style="color: black">← Nazad</a>
+    <h1>Arhiva svih vesti</h1>
+    <div id="list">Učitavanje...</div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const config = {
+        apiKey: "AIzaSyAwkpFwUaI9ODiH39WzEcpnRxODTVRWCbk",
+        authDomain: "olee-news.firebaseapp.com",
+        projectId: "olee-news",
+        storageBucket: "olee-news.firebasestorage.app",
+        messagingSenderId: "983990542162",
+        appId: "1:983990542162:web:7c506b4a89c51d2c85248b",
+        measurementId: "G-DRE0VYDCYT",
+      };
+
+      const app = initializeApp(config);
+      const db = getFirestore(app);
+
+      async function load() {
+        const list = document.getElementById("list");
+        try {
+          const snap = await getDocs(collection(db, "news"));
+          list.innerHTML = "";
+          if (snap.empty) {
+            list.innerHTML = "Nema vesti.";
+            return;
+          }
+
+          let items = [];
+          snap.forEach((doc) => items.push(doc.data()));
+          items.sort((a, b) => b.date - a.date);
+
+          items.forEach((i) => {
+            const d = new Date(i.date).toLocaleDateString("sr-RS");
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `<div class="date">${d}</div><h2>${i.title}</h2><p>${i.text}</p>`;
+            list.appendChild(div);
+          });
+        } catch (e) {
+          list.innerHTML = "Greška.";
+        }
+      }
+      load();
+    </script>
+  </body>
+</html>
