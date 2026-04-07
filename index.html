@@ -394,6 +394,41 @@
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       }
+      .newsBtn {
+        background-color: orangered;
+        color: white;
+        border-radius: 10px;
+        font-size: 20px;
+        /*border: solid rgba(0, 0, 0, 0.5) 2px;*/
+        padding: 10px;
+        box-shadow: 0 0 5px purple;
+        transition: 0.2s ease;
+        position: fixed;
+        top: 32px;
+      }
+      @media (min-width: 1200px) {
+        .newsBtn:hover {
+          font-size: 22px;
+        }
+      }
+      @media (max-width: 440px) {
+        .normalNewsBtn {
+          max-width: 70px;
+        }
+      }
+      @media (max-width: 1115px) {
+        .smallNewsBtn {
+          max-width: 50px;
+          font-size: 13px;
+        }
+      }
+      .smallNewsBtn {
+        right: 10px;
+        top: 100px;
+      }
+      .normalNewsBtn {
+        right: 150px;
+      }
     </style>
   </head>
   <body id="header">
@@ -444,6 +479,9 @@
 
     <header class="normal">
       <h1>OLEE</h1>
+      <a href="news.html"
+        ><button class="newsBtn normalNewsBtn">Vesti OLEE</button></a
+      >
       <a href="#header"
         ><img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo"
       /></a>
@@ -596,6 +634,7 @@
       const navBar = document.querySelector("header");
       const title = document.querySelector("h1");
       const logo = document.querySelector(".OLEElogo");
+      const newsBtn = document.querySelector(".newsBtn");
 
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -606,12 +645,16 @@
           logo.classList.remove("normalLogo");
           logo.classList.add("smallLogo");
           title.textContent = "";
+          newsBtn.classList.remove("normalNewsBtn");
+          newsBtn.classList.add("smallNewsBtn");
         } else {
           navBar.classList.remove("small");
           navBar.classList.add("normal");
           logo.classList.remove("smallLogo");
           logo.classList.add("normalLogo");
           title.textContent = "OLEE";
+          newsBtn.classList.remove("smallNewsBtn");
+          newsBtn.classList.add("normalNewsBtn");
         }
 
         const logos = document.querySelectorAll(".flying-logo");
