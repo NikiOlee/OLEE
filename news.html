@@ -26,10 +26,17 @@
         margin: 5px 0;
         color: #ffbf00;
       }
+      .video-container iframe {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9; /* Чтобы видео сохраняло пропорции */
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body>
-    <a href="index.html" style="color: black; font-size: 20px;">← Nazad</a>
+    <a href="index.html" style="color: black; font-size: 20px">← Nazad</a>
     <h1>Arhiva svih vesti</h1>
     <div id="list">Učitavanje...</div>
 
@@ -72,7 +79,17 @@
             const d = new Date(i.date).toLocaleDateString("sr-RS");
             const div = document.createElement("div");
             div.className = "card";
-            div.innerHTML = `<div class="date">${d}</div><h2>${i.title}</h2><p>${i.text}</p>`;
+
+            const videoContent = i.videoHtml
+              ? `<div class="video-container" style="margin-top:10px;">${i.videoHtml}</div>`
+              : "";
+
+            div.innerHTML = `
+    <div class="date">${d}</div>
+    <h2>${i.title}</h2>
+    <p>${i.text}</p>
+    ${videoContent}
+  `;
             list.appendChild(div);
           });
         } catch (e) {
