@@ -127,7 +127,7 @@ async function displayClubNews() {
           : "";
 
       const newsDiv = document.createElement("div");
-      newsDiv.className = "news-item";
+      newsDiv.className = "news-olee-item";
       newsDiv.innerHTML = `
         <div class="date" style="font-size: 11px; color: #666;">${d}</div>
         <div class="news-title">${data.title}</div>
