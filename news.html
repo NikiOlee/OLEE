@@ -26,12 +26,15 @@
         margin: 5px 0;
         color: #ffbf00;
       }
+      .video-container {
+        margin-top: 10px;
+      }
       .video-container iframe {
-        width: 100%;
         max-width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9; /* Чтобы видео сохраняло пропорции */
         border-radius: 10px;
+      }
+      .instagram-media {
+        margin: 10px auto !important;
       }
     </style>
   </head>
@@ -92,6 +95,9 @@
   `;
             list.appendChild(div);
           });
+          if (window.instgrm) {
+            window.instgrm.Embeds.process();
+          }
         } catch (e) {
           list.innerHTML = "Greška.";
         }
