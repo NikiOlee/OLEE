@@ -107,25 +107,24 @@ async function displayClubNews() {
     const q = query(
       collection(clubDb, "news"),
       orderBy("date", "desc"),
-      limit(3),
+      limit(1),
     );
     const snapshot = await getDocs(q);
-
     container.innerHTML = "";
-    if (snapshot.empty) {
-      container.innerHTML = "<p>Nema vesti.</p>";
-      return;
-    }
 
     snapshot.forEach((doc) => {
       const data = doc.data();
-      // Пробуем преобразовать дату, если она в строке или числе
       const dateValue = isNaN(data.date) ? data.date : Number(data.date);
       const d = new Date(dateValue).toLocaleDateString("sr-RS");
 
-      const videoContent = data.videoHtml
-        ? `<div class="video-container" style="margin-top:10px;">${data.videoHtml}</div>`
-        : "";
+      const videoContent =
+        data.videoHtml && data.videoHtml.trim() !== ""
+          ? `<div style="margin-top:10px;">
+             <a href="news.html" style="color: #3897f0; font-weight: bold; text-decoration: underline;">
+               Vidi video/objavu na stranici vesti →
+             </a>
+           </div>`
+          : "";
 
       const newsDiv = document.createElement("div");
       newsDiv.className = "news-item";
@@ -137,11 +136,6 @@ async function displayClubNews() {
       `;
       container.appendChild(newsDiv);
     });
-
-    // Оживляем Instagram
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
   } catch (e) {
     console.error(e);
     container.innerHTML = "<p>Greška.</p>";
@@ -165,9 +159,15 @@ async function displaySiteNews() {
       const dateValue = isNaN(data.date) ? data.date : Number(data.date);
       const d = new Date(dateValue).toLocaleDateString("sr-RS");
 
-      const videoContent = data.videoHtml
-        ? `<div class="video-container" style="margin-top:10px;">${data.videoHtml}</div>`
-        : "";
+      let videoContent = "";
+      if (data.videoHtml && data.videoHtml.trim() !== "") {
+        videoContent = `
+          <div style="margin-top:10px; padding: 10px; border: 1px dashed #3897f0; border-radius: 8px;">
+            <a href="news.html" style="color: #3897f0; font-weight: bold; text-decoration: underline; font-size: 14px;">
+              Vidi video/objavu na stranici vesti →
+            </a>
+          </div>`;
+      }
 
       const newsDiv = document.createElement("div");
       newsDiv.className = "news-item";
@@ -180,9 +180,7 @@ async function displaySiteNews() {
       container.appendChild(newsDiv);
     });
 
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
+    // if (window.instgrm) { window.instgrm.Embeds.process(); }
   } catch (e) {
     console.error("Ошибка Firebase:", e);
     container.innerHTML = "<p>Greška pri učitavanju vesti sajta.</p>";
