@@ -405,6 +405,8 @@ iframe:hover {
 }
 #news {
   height: auto;
+  padding-bottom: 5px;
+  border-radius: 10px;
 }
 .video-container .instagram-media {
   margin: 10px auto !important;
@@ -416,4 +418,15 @@ iframe:hover {
   height: 315px;
   max-width: 100%;
   border-radius: 10px;
+}
+.news-olee-item {
+  border: 2px solid #ccc !important;
+  border-radius: 10px;
+  padding: 7px;
+  transition:
+    all 0.2s ease;
+}
+.news-olee-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
