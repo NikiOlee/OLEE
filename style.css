@@ -406,10 +406,14 @@ iframe:hover {
 #news {
   height: auto;
 }
-.video-container iframe {
-  width: 100%;
+.video-container .instagram-media {
+  margin: 10px auto !important;
+  position: relative !important;
+  min-width: 200px !important;
+}
+.video-container iframe:not(.instagram-media) {
+  width: 560px;
+  height: 315px;
   max-width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
   border-radius: 10px;
 }
