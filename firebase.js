@@ -119,16 +119,16 @@ async function displayClubNews() {
 
     snapshot.forEach((doc) => {
       const data = doc.data();
-      const d = new Date(data.date).toLocaleDateString("sr-RS");
+      // Пробуем преобразовать дату, если она в строке или числе
+      const dateValue = isNaN(data.date) ? data.date : Number(data.date);
+      const d = new Date(dateValue).toLocaleDateString("sr-RS");
 
-      // ПРОВЕРКА: Если есть поле videoHtml, создаем для него блок
       const videoContent = data.videoHtml
         ? `<div class="video-container" style="margin-top:10px;">${data.videoHtml}</div>`
         : "";
 
       const newsDiv = document.createElement("div");
       newsDiv.className = "news-item";
-      // Добавляем ${videoContent} в конец
       newsDiv.innerHTML = `
         <div class="date" style="font-size: 11px; color: #666;">${d}</div>
         <div class="news-title">${data.title}</div>
@@ -137,15 +137,20 @@ async function displayClubNews() {
       `;
       container.appendChild(newsDiv);
     });
+
+    // Оживляем Instagram
+    if (window.instgrm) {
+      window.instgrm.Embeds.process();
+    }
   } catch (e) {
     console.error(e);
     container.innerHTML = "<p>Greška.</p>";
   }
 }
+
 async function displaySiteNews() {
   const container = document.getElementById("news-container");
   try {
-    // Убрали limit(3), теперь будут грузиться все новости сайта
     const q = query(collection(siteDb, "news"), orderBy("date", "desc"));
     const snapshot = await getDocs(q);
 
@@ -156,33 +161,30 @@ async function displaySiteNews() {
     }
 
     snapshot.forEach((doc) => {
-      // ... внутри snapshot.forEach((doc) => {
       const data = doc.data();
-      const d = new Date(data.date).toLocaleDateString("sr-RS");
-      const newsDiv = document.createElement("div");
-      newsDiv.className = "news-item";
+      const dateValue = isNaN(data.date) ? data.date : Number(data.date);
+      const d = new Date(dateValue).toLocaleDateString("sr-RS");
 
-      // Проверяем, есть ли iframe в данных
       const videoContent = data.videoHtml
         ? `<div class="video-container" style="margin-top:10px;">${data.videoHtml}</div>`
         : "";
 
-      newsDiv.innerHTML = `
-  <div class="date" style="font-size: 11px; color: #666;">${d}</div>
-  <div class="news-title">${data.title}</div>
-  <p>${data.text}</p>
-  ${videoContent} 
-`;
-      container.appendChild(newsDiv);
-      /*const data = doc.data();
-      const d = new Date(data.date).toLocaleDateString("sr-RS");
-      const newsDiv = document.createElement("div");*/
+      const newsDiv = document.createElement("div");
       newsDiv.className = "news-item";
-      newsDiv.innerHTML = `<div class="date" style="font-size: 11px; color: #666;">${d}</div><div class="news-title">${data.title}</div><p>${data.text}</p>`;
+      newsDiv.innerHTML = `
+        <div class="date" style="font-size: 11px; color: #666;">${d}</div>
+        <div class="news-title">${data.title}</div>
+        <p>${data.text}</p>
+        ${videoContent} 
+      `;
       container.appendChild(newsDiv);
     });
+
+    if (window.instgrm) {
+      window.instgrm.Embeds.process();
+    }
   } catch (e) {
-    console.error("Ошибка Firebase:", e); // Выводим ошибку в консоль для отладки
+    console.error("Ошибка Firebase:", e);
     container.innerHTML = "<p>Greška pri učitavanju vesti sajta.</p>";
   }
 }
