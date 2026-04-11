@@ -1,31 +1,34 @@
 const navBar = document.querySelector("header");
-      const title = document.querySelector("h1");
-      const logo = document.querySelector(".OLEElogo");
-      const newsBtn = document.querySelector(".newsBtn");
+const title = document.querySelector("h1");
+const logo = document.querySelector(".OLEElogo");
+const newsBtn = document.querySelector(".newsBtn");
+const main = document.querySelector(".main");
 
-      document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-      window.addEventListener("scroll", function () {
-        if (window.scrollY > 10) {
-          navBar.classList.remove("normal");
-          navBar.classList.add("small");
-          logo.classList.remove("normalLogo");
-          logo.classList.add("smallLogo");
-          title.textContent = "";
-        } else {
-          navBar.classList.remove("small");
-          navBar.classList.add("normal");
-          logo.classList.remove("smallLogo");
-          logo.classList.add("normalLogo");
-          title.textContent = "OLEE";
-        }
+main.style.margin = '135px 60px 20px 10px';
 
-        const logos = document.querySelectorAll(".flying-logo");
-        logos.forEach((item) => {
-          const speed = item.getAttribute("data-speed");
-          const rotation = item.getAttribute("data-rotation") || 0;
-          const yPos = -(window.scrollY * speed);
+window.addEventListener("scroll", function () {
+  if (window.scrollY > 10) {
+    navBar.classList.remove("normal");
+    navBar.classList.add("small");
+    logo.classList.remove("normalLogo");
+    logo.classList.add("smallLogo");
+    title.textContent = "";
+  } else {
+    navBar.classList.remove("small");
+    navBar.classList.add("normal");
+    logo.classList.remove("smallLogo");
+    logo.classList.add("normalLogo");
+    title.textContent = "OLEE";
+  }
 
-          item.style.transform = `translateY(${yPos}px) rotateZ(${rotation}deg)`;
-        });
-      });
+  const logos = document.querySelectorAll(".flying-logo");
+  logos.forEach((item) => {
+    const speed = item.getAttribute("data-speed");
+    const rotation = item.getAttribute("data-rotation") || 0;
+    const yPos = -(window.scrollY * speed);
+
+    item.style.transform = `translateY(${yPos}px) rotateZ(${rotation}deg)`;
+  });
+});
