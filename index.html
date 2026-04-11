@@ -179,6 +179,11 @@
             >
               ⚠️ Da biste koristili kartu, uključite JavaScript.
             </div>
+            <style>
+              iframe {
+                display: none;
+              }
+            </style>
           </noscript>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d725.8502513673096!2d19.824848684454057!3d45.25349332264761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b104860a94f0f%3A0x9b44dd33e2d21658!2sNovosadskog%20sajma%2037%2C%20Novi%20Sad%2021101!5e1!3m2!1sen!2srs!4v1775115856500!5m2!1sen!2srs"
@@ -197,7 +202,8 @@
               #name,
               #comment,
               button,
-              #warning {
+              #warning,
+              #comments-section {
                 display: none;
               }
             </style>
@@ -232,11 +238,25 @@
         <div class="block">
           <h2>Vesti sajta</h2>
           <div id="news-container"></div>
+          <noscript>
+            <div
+              style="
+                background: #ffe0e0;
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 10px;
+                text-align: center;
+                font-weight: bold;
+              "
+            >
+              ⚠️ Da bi se pokazali vesti sajta, uključite JavaScript.
+            </div>
+          </noscript>
         </div>
       </div>
     </div>
     <footer>
-      © <span id="year"></span> OLEE – Informativna stranica. Ova stranica nije
+      © <span id="year">2026</span> OLEE – Informativna stranica. Ova stranica nije
       zvanični sajt sportskog kluba OLEE.
     </footer>
     <script src="script.js"></script>
