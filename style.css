@@ -402,6 +402,7 @@ iframe:hover {
 }
 .news {
   font-size: 30px !important;
+  color: #FF8000;
 }
 #news {
   height: auto;
