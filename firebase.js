@@ -59,21 +59,26 @@ async function loadComments(isMore = false) {
       commentsCol,
       orderBy("date", "desc"),
       startAfter(lastDoc),
-      limit(5),
+      limit(6),
     );
   } else {
     const listElement = document.getElementById("comments-list");
     if (listElement) listElement.innerHTML = "";
-    q = query(commentsCol, orderBy("date", "desc"), limit(5));
+    q = query(commentsCol, orderBy("date", "desc"), limit(6));
   }
   const snapshot = await getDocs(q);
   if (snapshot.empty) {
     document.getElementById("load-more-btn").style.display = "none";
     return;
   }
-  lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
+  const hasMore = snapshot.docs.length > 5;
+  lastDoc = hasMore
+    ? snapshot.docs[4]
+    : snapshot.docs[snapshot.docs.length - 1];
+
   const list = document.getElementById("comments-list");
-  snapshot.forEach((doc) => {
+  snapshot.docs.slice(0, 5).forEach((doc) => {
     const data = doc.data();
     const div = document.createElement("div");
     div.className = "comment";
@@ -81,8 +86,10 @@ async function loadComments(isMore = false) {
     div.innerHTML = `<strong>${data.name}:</strong> <small style="color: gray; margin-left: 10px;">${dateString}</small><br>${data.text}`;
     list.appendChild(div);
   });
-  document.getElementById("load-more-btn").style.display =
-    snapshot.docs.length < 5 ? "none" : "block";
+
+  document.getElementById("load-more-btn").style.display = hasMore
+    ? "block"
+    : "none";
 }
 
 window.loadMoreComments = () => loadComments(true);
