@@ -10,31 +10,34 @@
         font-family: sans-serif;
         background: #ffbf00;
         padding: 20px;
+        margin: 0;
       }
+
       .card {
         background: white;
         padding: 15px;
         border-radius: 10px;
-        margin-bottom: 15px;
+        margin: 0 auto 15px auto;
         border-left: 5px solid #333;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
       }
-      .date {
-        font-size: 11px;
-        color: #666;
-      }
+
       h2 {
         margin: 5px 0;
         color: #ffbf00;
       }
-      .video-container {
-        margin-top: 10px;
-      }
-      .video-container iframe {
-        max-width: 100%;
-        border-radius: 10px;
-      }
       .instagram-media {
+        max-width: 550px !important;
+        width: 100% !important;
+        min-width: 250px !important;
         margin: 10px auto !important;
+      }
+
+      .video-container iframe {
+        width: 100% !important;
+        border-radius: 10px;
       }
     </style>
   </head>
@@ -42,7 +45,6 @@
     <a href="index.html" style="color: black; font-size: 20px">← Nazad</a>
     <h1>Arhiva svih vesti</h1>
     <div id="list">Učitavanje...</div>
-
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import {
