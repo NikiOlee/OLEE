@@ -39,10 +39,43 @@
         width: 100% !important;
         margin: 10px auto !important;
       }
+      .back {
+        position: fixed;
+        right: 25px;
+        top: 25px;
+        text-decoration: none;
+        z-index: 1000;
+      }
+      .backBtn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        background: orange;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(132, 0, 255, 0.3);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .backBtn:hover {
+        background: #ffbf00;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
+      }
+      .backBtn:active {
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
-    <a href="index.html" style="color: black; font-size: 20px">← Nazad</a>
+    <a href="index.html" class="back"
+      ><button class="backBtn">← Nazad</button></a
+    >
     <h1>Arhiva svih vesti</h1>
     <div id="list">Učitavanje...</div>
 
