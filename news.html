@@ -112,17 +112,28 @@
 
           let items = [];
           snap.forEach((doc) => items.push(doc.data()));
-          items.sort((a, b) => a.date - b.date);
 
-          items.forEach((i, index) => {
-            const d = new Date(i.date).toLocaleDateString("sr-RS");
+          // --- ВОТ ЭТОТ КУСОК НУЖНО ВСТАВИТЬ ---
+          const parseMyDate = (dateStr) => {
+            if (!dateStr || typeof dateStr !== "string") return 0;
+            const parts = dateStr.split(" ");
+            // parts[2] - год, parts[1] - месяц, parts[0] - день
+            return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+          };
+
+          // Сортируем: b - a (от новых к старым)
+          items.sort((a, b) => parseMyDate(b.date) - parseMyDate(a.date));
+          // -------------------------------------
+
+          items.forEach((i) => {
+            const d = i.date; // Твоя дата строкой (напр. "13 4 2026")
             const div = document.createElement("div");
             div.className = "card";
-            if (index === items.length - 1) div.id = "new";
 
             const videoContent = i.videoHtml
               ? `<div class="video-container" style="margin-top:10px;">${i.videoHtml}</div>`
               : "";
+
             div.innerHTML = `<div class="date">${d}</div><h2>${i.title}</h2><p>${i.text}</p>${videoContent}`;
             list.appendChild(div);
           });
@@ -130,24 +141,9 @@
           if (window.instgrm) {
             window.instgrm.Embeds.process();
           }
-
-          const jumpToNew = (behavior) => {
-            const newPost = document.getElementById("new");
-            if (newPost) {
-              newPost.scrollIntoView({ behavior: behavior, block: "start" });
-            }
-          };
-
-          jumpToNew("auto");
-
-          let checks = 0;
-          const interval = setInterval(() => {
-            jumpToNew("smooth");
-            checks++;
-            if (checks > 6) clearInterval(interval);
-          }, 500);
         } catch (e) {
           list.innerHTML = "Greška.";
+          console.error(e);
         }
       }
       load();
