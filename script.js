@@ -2,11 +2,8 @@ const navBar = document.querySelector("header");
 const title = document.querySelector("h1");
 const logo = document.querySelector(".OLEElogo");
 const newsBtn = document.querySelector(".newsBtn");
-const main = document.querySelector(".main");
 
 document.getElementById("year").textContent = new Date().getFullYear();
-
-main.style.margin = '135px 60px 20px 10px';
 
 window.addEventListener("scroll", function () {
   if (window.scrollY > 10) {
