@@ -111,26 +111,30 @@ window.addComment = async function () {
 async function displayClubNews() {
   const container = document.getElementById("list");
   try {
-    const q = query(
-      collection(clubDb, "news"),
-      orderBy("date", "desc"),
-      limit(1),
-    );
+    // Убираем orderBy из запроса, так как он мешает строковым датам
+    const q = query(collection(clubDb, "news"));
     const snapshot = await getDocs(q);
     container.innerHTML = "";
 
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const dateValue = isNaN(data.date) ? data.date : Number(data.date);
-      const d = new Date(dateValue).toLocaleDateString("sr-RS");
+    let items = [];
+    snapshot.forEach((doc) => items.push(doc.data()));
 
+    // Функция-помощник для парсинга твоей даты "13 4 2026"
+    const parseDate = (d) => {
+      if (typeof d !== "string" || !d.includes(" ")) return 0;
+      const p = d.split(" ");
+      return new Date(p[2], p[1] - 1, p[0]).getTime();
+    };
+
+    // Сортируем все новости и берем самую первую (новую)
+    items.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    const data = items[0];
+
+    if (data) {
+      const d = data.date;
       const videoContent =
         data.videoHtml && data.videoHtml.trim() !== ""
-          ? `<div style="margin-top:10px;">
-             <a href="news.html#new" style="color: #3897f0; font-weight: bold; text-decoration: underline;">
-               Vidi video/objavu na stranici vesti →
-             </a>
-           </div>`
+          ? `<div style="margin-top:10px;"><a href="news.html#new" style="color: #3897f0; font-weight: bold; text-decoration: underline;">Vidi video/objavu na stranici vesti →</a></div>`
           : "";
 
       const newsDiv = document.createElement("div");
@@ -142,7 +146,7 @@ async function displayClubNews() {
         ${videoContent}
       `;
       container.appendChild(newsDiv);
-    });
+    }
   } catch (e) {
     console.error(e);
     container.innerHTML = "<p>Greška.</p>";
