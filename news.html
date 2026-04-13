@@ -6,13 +6,15 @@
     <link rel="shortcut icon" href="OLEELogoNews.png" type="image/x-icon" />
     <title>Sve OLEE Vesti</title>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: sans-serif;
         background: #ffbf00;
         padding: 20px;
         margin: 0;
       }
-
       .card {
         background: white;
         padding: 15px;
@@ -22,22 +24,20 @@
         box-sizing: border-box;
         width: 100%;
         max-width: 100%;
+        min-height: 50px;
       }
-
       h2 {
         margin: 5px 0;
         color: #ffbf00;
       }
+      .date {
+        font-size: 11px;
+        color: #666;
+      }
       .instagram-media {
         max-width: 550px !important;
         width: 100% !important;
-        min-width: 250px !important;
         margin: 10px auto !important;
-      }
-
-      .video-container iframe {
-        width: 100% !important;
-        border-radius: 10px;
       }
     </style>
   </head>
@@ -45,6 +45,7 @@
     <a href="index.html" style="color: black; font-size: 20px">← Nazad</a>
     <h1>Arhiva svih vesti</h1>
     <div id="list">Učitavanje...</div>
+
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import {
@@ -71,35 +72,57 @@
         try {
           const snap = await getDocs(collection(db, "news"));
           list.innerHTML = "";
-          if (snap.empty) {
-            list.innerHTML = "Nema vesti.";
-            return;
-          }
 
           let items = [];
           snap.forEach((doc) => items.push(doc.data()));
-          items.sort((a, b) => b.date - a.date);
 
-          items.forEach((i) => {
+          // Сортировка: новые в конце
+          items.sort((a, b) => a.date - b.date);
+
+          items.forEach((i, index) => {
             const d = new Date(i.date).toLocaleDateString("sr-RS");
             const div = document.createElement("div");
             div.className = "card";
 
-            const videoContent = i.videoHtml
-              ? `<div class="video-container" style="margin-top:10px;">${i.videoHtml}</div>`
-              : "";
+            // Последняя новость (самая новая) получает ID 'new'
+            if (index === items.length - 1) {
+              div.id = "new";
+            }
 
+            const videoContent = i.videoHtml
+              ? `<div style="margin-top:10px;">${i.videoHtml}</div>`
+              : "";
             div.innerHTML = `
-    <div class="date">${d}</div>
-    <h2>${i.title}</h2>
-    <p>${i.text}</p>
-    ${videoContent}
-  `;
+        <div class="date">${d}</div>
+        <h2>${i.title}</h2>
+        <p>${i.text}</p>
+        ${videoContent}
+      `;
             list.appendChild(div);
           });
+
+          // 1. Запускаем Instagram
           if (window.instgrm) {
             window.instgrm.Embeds.process();
           }
+
+          // 2. Функция для точного прыжка
+          const finalScroll = () => {
+            const newPost = document.getElementById("new");
+            if (newPost) {
+              newPost.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          };
+
+          // 3. Сначала прыгаем мгновенно, чтобы не ждать
+          setTimeout(() => {
+            const newPost = document.getElementById("new");
+            if (newPost)
+              newPost.scrollIntoView({ behavior: "auto", block: "start" });
+          }, 100);
+
+          // 4. ГЛАВНОЕ: Ждем, пока Instagram "раздует" страницу, и доскролливаем через секунду
+          setTimeout(finalScroll, 1200);
         } catch (e) {
           list.innerHTML = "Greška.";
         }

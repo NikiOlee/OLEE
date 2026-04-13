@@ -127,7 +127,7 @@ async function displayClubNews() {
       const videoContent =
         data.videoHtml && data.videoHtml.trim() !== ""
           ? `<div style="margin-top:10px;">
-             <a href="news.html" style="color: #3897f0; font-weight: bold; text-decoration: underline;">
+             <a href="news.html#new" style="color: #3897f0; font-weight: bold; text-decoration: underline;">
                Vidi video/objavu na stranici vesti →
              </a>
            </div>`
