@@ -131,19 +131,15 @@
             window.instgrm.Embeds.process();
           }
 
-          // Функция для точного прыжка
           const jumpToNew = (behavior) => {
             const newPost = document.getElementById("new");
             if (newPost) {
-              newPost.scrollIntoView({ behavior: behavior, block: "center" });
+              newPost.scrollIntoView({ behavior: behavior, block: "start" });
             }
           };
 
-          // 1. Мгновенный прыжок сразу (чтобы не смотреть на старые новости)
           jumpToNew("auto");
 
-          // 2. Серия "корректировок" по мере загрузки Инстаграма
-          // Каждые полсекунды подправляем экран в течение 3 секунд
           let checks = 0;
           const interval = setInterval(() => {
             jumpToNew("smooth");
