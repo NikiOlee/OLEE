@@ -129,10 +129,13 @@ async function displayClubNews() {
 
     if (data) {
       const d = data.date;
-      const videoContent =
-        data.videoHtml && data.videoHtml.trim() !== ""
-          ? `<div style="margin-top:10px;"><a href="news.html" class="oleeNewsLink"><button class="oleeNewsBtn">Vidi video/objavu na stranici vesti →</button></a></div>`
-          : "";
+      const videoContent = `
+  <div style="margin-top:10px;">
+    <a href="news.html" class="oleeNewsLink">
+      <button class="oleeNewsBtn">Vidi video/objavu na stranici vesti →</button>
+    </a>
+  </div>
+`;
 
       const newsDiv = document.createElement("div");
       newsDiv.className = "news-olee-item";
