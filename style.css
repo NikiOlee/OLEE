@@ -425,7 +425,7 @@ iframe:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 .oleeNewsBtn {
-  background-color: rgb(245, 245, 245);
+  background-color: #ffbf00;
   border: 2px grey solid;
   border-radius: 8px;
   padding: 5px 10px;
