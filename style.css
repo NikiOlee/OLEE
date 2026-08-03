@@ -583,3 +583,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
 .slider-btn:active {
   transform: translateY(-50%) scale(0.95);
 }
+.olee-slider-wrapper {
+  position: relative; /* Теперь 50% высоты будет считаться ОТ СЛАЙДЕРА, а не от всей страницы */
+}
