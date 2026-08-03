@@ -523,8 +523,8 @@ body:not(.scrolled)::-webkit-scrollbar-track {
   background: linear-gradient(
     to bottom,
     #ffbf00 0%,
-    #ffbf00 110px,
-    transparent 110px
+    #ffbf00 var(--header-h, 110px),
+    transparent var(--header-h, 110px)
   );
 }
 
@@ -540,7 +540,7 @@ body.scrolled::-webkit-scrollbar-track {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ff9900;
 }
-/* Обертка для слайдера, чтобы кнопки позиционировались относительно неё */
+
 .olee-slider-wrapper {
   position: relative;
 }
@@ -567,17 +567,14 @@ body.scrolled::-webkit-scrollbar-track {
     background-color 0.2s ease;
 }
 
-/* Левая кнопка (слева) */
 .prev-btn {
   left: 5px;
 }
 
-/* Правая кнопка (справа) */
 .next-btn {
   right: 5px;
 }
 
-/* Эффекты при наведении */
 .slider-btn:hover {
   background-color: #ff9900;
   transform: translateY(-50%) scale(1.1);

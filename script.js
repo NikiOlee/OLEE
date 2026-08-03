@@ -7,22 +7,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 window.addEventListener("scroll", function () {
   if (window.scrollY > 10) {
-    document.body.classList.add("scrolled"); // <--- Добавили эту строчку
+    document.body.classList.add("scrolled");
     navBar.classList.remove("normal");
     navBar.classList.add("small");
     logo.classList.remove("normalLogo");
     logo.classList.add("smallLogo");
     title.textContent = "";
   } else {
-    document.body.classList.remove("scrolled"); // <--- И эту строчку
+    document.body.classList.remove("scrolled");
     navBar.classList.remove("small");
     navBar.classList.add("normal");
     logo.classList.remove("smallLogo");
     logo.classList.add("normalLogo");
     title.textContent = "OLEE";
   }
-
-  // Остальной код с летающими логотипами оставляешь как есть...
 
   const logos = document.querySelectorAll(".flying-logo");
   logos.forEach((item) => {
@@ -34,9 +32,27 @@ window.addEventListener("scroll", function () {
   });
 });
 function slideLeft() {
-  document.querySelector('.olee-slider').scrollBy({ left: -280, behavior: 'smooth' });
+  document
+    .querySelector(".olee-slider")
+    .scrollBy({ left: -280, behavior: "smooth" });
 }
 
 function slideRight() {
-  document.querySelector('.olee-slider').scrollBy({ left: 280, behavior: 'smooth' });
+  document
+    .querySelector(".olee-slider")
+    .scrollBy({ left: 280, behavior: "smooth" });
 }
+
+function updateHeaderHeight() {
+  const header = document.querySelector("header");
+  if (header) {
+    const exactHeight = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty(
+      "--header-h",
+      exactHeight + "px",
+    );
+  }
+}
+
+window.addEventListener("resize", updateHeaderHeight);
+updateHeaderHeight();
