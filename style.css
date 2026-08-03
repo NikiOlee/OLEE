@@ -589,3 +589,73 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
 .olee-slider-wrapper {
   position: relative; /* Теперь 50% высоты будет считаться ОТ СЛАЙДЕРА, а не от всей страницы */
 }
+/* --- FAQ (мягкий стиль без грубых рамок) --- */
+
+.block ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa; /* Мягкая светлая подложка */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0; /* Едва заметный нежный контур */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.block ul li {
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  padding: 14px 16px 14px 38px;
+  background-color: transparent;
+  border-bottom: 1px solid #f0f0f0; /* Мягкая незаметная линия между вопросами */
+  font-weight: bold;
+  color: #222;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.block ul li:last-child {
+  border-bottom: none;
+}
+
+/* При наведении — пункт слегка подсвечивается */
+.block ul li:hover {
+  background-color: #f2f2f2;
+}
+
+/* Открытый пункт становится полностью белым */
+.block ul li.active {
+  background-color: #ffffff;
+}
+
+/* Оранжевая стрелочка */
+.block ul li::after {
+  content: "❯";
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  font-size: 13px;
+  color: #ffbf00;
+  transition: transform 0.3s ease;
+}
+
+.block ul li.active::after {
+  transform: rotate(90deg);
+}
+
+/* Ответ внутри */
+.block ul li p {
+  display: none;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0e0e0;
+  font-weight: normal;
+  color: #444;
+  line-height: 1.5;
+}
+
+.block ul li.active p {
+  display: block;
+}
