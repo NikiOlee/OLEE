@@ -442,3 +442,148 @@ iframe:hover {
   color: black;
   text-decoration: none;
 }
+
+.olee-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 5px 15px 5px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.olee-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.olee-slider::-webkit-scrollbar-thumb {
+  background-color: #ffbf00;
+  border-radius: 10px;
+}
+
+.olee-slide {
+  flex: 0 0 270px;
+  scroll-snap-align: start;
+  background-color: #ffffff;
+  border: 2px solid #ffbf00;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+@media (max-width: 450px) {
+  .olee-slide {
+    padding: 18px 10px;
+    max-width: 250px;
+  }
+  .olee-slider::-webkit-scrollbar {
+    height: 6px;
+  }
+}
+@media (max-width: 600px) {
+  .slider-btn {
+    display: none !important;
+  }
+}
+.olee-slide:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.slide-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.olee-slide h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111111;
+  margin-bottom: 8px;
+}
+
+.olee-slide p {
+  font-size: 15px;
+  color: #222222;
+  line-height: 1.5;
+}
+
+header {
+  padding-right: 25px !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+body:not(.scrolled)::-webkit-scrollbar-track {
+  background: linear-gradient(
+    to bottom,
+    #ffbf00 0%,
+    #ffbf00 110px,
+    transparent 110px
+  );
+}
+
+body.scrolled::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffbf00;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff9900;
+}
+/* Обертка для слайдера, чтобы кнопки позиционировались относительно неё */
+.olee-slider-wrapper {
+  position: relative;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: #ffbf00;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Левая кнопка (слева) */
+.prev-btn {
+  left: 5px;
+}
+
+/* Правая кнопка (справа) */
+.next-btn {
+  right: 5px;
+}
+
+/* Эффекты при наведении */
+.slider-btn:hover {
+  background-color: #ff9900;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}

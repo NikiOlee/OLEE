@@ -7,18 +7,22 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 window.addEventListener("scroll", function () {
   if (window.scrollY > 10) {
+    document.body.classList.add("scrolled"); // <--- Добавили эту строчку
     navBar.classList.remove("normal");
     navBar.classList.add("small");
     logo.classList.remove("normalLogo");
     logo.classList.add("smallLogo");
     title.textContent = "";
   } else {
+    document.body.classList.remove("scrolled"); // <--- И эту строчку
     navBar.classList.remove("small");
     navBar.classList.add("normal");
     logo.classList.remove("smallLogo");
     logo.classList.add("normalLogo");
     title.textContent = "OLEE";
   }
+
+  // Остальной код с летающими логотипами оставляешь как есть...
 
   const logos = document.querySelectorAll(".flying-logo");
   logos.forEach((item) => {
@@ -29,3 +33,10 @@ window.addEventListener("scroll", function () {
     item.style.transform = `translateY(${yPos}px) rotateZ(${rotation}deg)`;
   });
 });
+function slideLeft() {
+  document.querySelector('.olee-slider').scrollBy({ left: -280, behavior: 'smooth' });
+}
+
+function slideRight() {
+  document.querySelector('.olee-slider').scrollBy({ left: 280, behavior: 'smooth' });
+}

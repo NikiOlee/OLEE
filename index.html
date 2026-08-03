@@ -100,6 +100,44 @@
           </p>
         </div>
         <div class="block">
+          <h2>Zašto je OLEE potreban vašem detetu?</h2>
+          <div class="olee-slider-wrapper">
+            <button class="slider-btn prev-btn" onclick="slideLeft()">&#10094;</button>
+
+            <div class="olee-slider">
+              <!-- Слайд 1 -->
+              <div class="olee-slide">
+                <div class="slide-icon">🏆</div>
+                <h3>Iskusni treneri</h3>
+                <p>Naši treneri znaju kako da zainteresuju dete za sport i pomognu mu da razvije svoj potencijal.</p>
+              </div>
+
+              <!-- Слайд 2 -->
+              <div class="olee-slide">
+                <div class="slide-icon">⚽</div>
+                <h3>Zdravlje i forma</h3>
+                <p>Redovni treninzi jačaju imunitet, razvijaju koordinaciju, snagu i agilnost kod dece.</p>
+              </div>
+
+              <!-- Слайд 3 -->
+              <div class="olee-slide">
+                <div class="slide-icon">🤝</div>
+                <h3>Timski duh</h3>
+                <p>Deca uče da komuniciraju, podržavaju jedni druge i stiču prave prijatelje na treningu.</p>
+              </div>
+
+              <!-- Слайд 4 -->
+              <div class="olee-slide">
+                <div class="slide-icon">🎯</div>
+                <h3>Samopouzdanje</h3>
+                <p>Prve pobede i savladavanje prepreka grade jak karakter i radnu disciplinu.</p>
+              </div>
+            </div>
+
+            <button class="slider-btn next-btn" onclick="slideRight()">&#10095;</button>
+          </div>
+        </div>
+        <div class="block">
           <h2>Društvene mreže i kontakt</h2>
           <div class="block">
             <h3>Društvene mreže</h3>
@@ -242,6 +280,13 @@
           <h2>Vesti sajta</h2>
           <div id="news-container"></div>
           <noscript>
+            <style>
+              #name,
+              #comment,
+              button {
+                display: none;
+              }
+            </style>
             <div
               style="
                 background: #ffe0e0;
