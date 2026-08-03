@@ -42,3 +42,10 @@ function slideRight() {
     .querySelector(".olee-slider")
     .scrollBy({ left: 280, behavior: "smooth" });
 }
+// --- 1. Логика FAQ (Аккордеон) ---
+document.querySelectorAll(".block ul li").forEach((item) => {
+  item.addEventListener("click", () => {
+    // Переключаем класс active при клике на вопрос
+    item.classList.toggle("active");
+  });
+});
