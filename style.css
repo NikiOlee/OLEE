@@ -558,13 +558,16 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   height: 40px;
   font-size: 20px;
   font-weight: bold;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   transition:
     transform 0.2s ease,
     background-color 0.2s ease;
+}
+#whyOLEE:hover .slider-btn {
+  display: flex;
 }
 
 .prev-btn {
