@@ -522,27 +522,27 @@ header {
 body:not(.scrolled)::-webkit-scrollbar-track {
   background: linear-gradient(
     to bottom,
-    #ffbf00 0%,
+    #ffbf00 0px,
     #ffbf00 var(--header-h, 110px),
     transparent var(--header-h, 110px)
   );
+}
+
+body:not(.scrolled)::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 body.scrolled::-webkit-scrollbar-track {
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+body.scrolled::-webkit-scrollbar-thumb {
   background-color: #ffbf00;
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+body.scrolled::-webkit-scrollbar-thumb:hover {
   background-color: #ff9900;
-}
-
-.olee-slider-wrapper {
-  position: relative;
 }
 
 .slider-btn {

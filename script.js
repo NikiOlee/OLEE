@@ -42,17 +42,3 @@ function slideRight() {
     .querySelector(".olee-slider")
     .scrollBy({ left: 280, behavior: "smooth" });
 }
-
-function updateHeaderHeight() {
-  const header = document.querySelector("header");
-  if (header) {
-    const exactHeight = header.getBoundingClientRect().height;
-    document.documentElement.style.setProperty(
-      "--header-h",
-      exactHeight + "px",
-    );
-  }
-}
-
-window.addEventListener("resize", updateHeaderHeight);
-updateHeaderHeight();
