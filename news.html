@@ -3,83 +3,168 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="OLEELogoNews.png" type="image/x-icon" />
     <title>Sve OLEE Vesti</title>
+    <link rel="shortcut icon" href="OLEElogo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
       body {
-        font-family: sans-serif;
-        background: #ffbf00;
-        padding: 20px;
-        margin: 0;
+        background-color: white;
       }
-      .card {
-        background: white;
-        padding: 15px;
-        border-radius: 10px;
-        margin: 0 auto 15px auto;
-        border-left: 5px solid #333;
-        box-sizing: border-box;
+      .normal {
         width: 100%;
-        max-width: 100%;
-        min-height: 50px;
+        position: fixed;
+        background-image: linear-gradient(to right, orange, #ffbf00);
+        padding: 15px 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       }
-      h2 {
-        margin: 5px 0;
-        color: #ffbf00;
+      .small {
+        width: 100%;
+        position: fixed;
+        background-image: none;
+        padding: 15px 10px;
+      }
+      .main {
+        background-color: rgb(230, 230, 230);
+        max-width: 800px;
+        border-radius: 20px;
+        padding: 23px 30px 30px 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .link-back {
+        color: #000000;
+        font-weight: bold;
+        text-decoration: none;
+        margin-bottom: 20px;
+        background-color: #ffbf00;
+        padding: 10px;
+        border-radius: 25px;
+        border: 2px grey solid;
+      }
+
+      /* Карточки новостей */
+      .card {
+        background: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        text-align: left;
       }
       .date {
-        font-size: 11px;
-        color: #666;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+        color: #d97706;
+        background: #ffecd1;
+        padding: 4px 12px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+      }
+      .card h2 {
+        margin: 0 0 10px 0;
+        color: #000000;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .card p {
+        margin: 0;
+        color: #666666;
+        font-size: 16px;
+        line-height: 1.5;
       }
       .instagram-media {
-        max-width: 550px !important;
-        width: 100% !important;
-        margin: 10px auto !important;
-        min-width: 100px !important;
-      }
-      .back {
-        position: fixed;
-        right: 25px;
-        top: 25px;
-        text-decoration: none;
-        z-index: 1000;
-      }
-      .backBtn {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: none;
-        background: orange;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(132, 0, 255, 0.3);
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .backBtn:hover {
-        background: #ffbf00;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
-      }
-      .backBtn:active {
-        transform: translateY(0);
+        max-width: 100%;
+        width: 100%;
+        margin: 16px auto 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
       }
     </style>
   </head>
   <body>
-    <a href="index.html" class="back"
-      ><button class="backBtn">← Nazad</button></a
-    >
-    <h1>Arhiva svih vesti</h1>
-    <div id="list">Učitavanje...</div>
+    <!-- Летающие логотипы -->
+    <div class="parallax-bg">
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 20%; left: 0%; transform: rotateZ(30deg)"
+        data-speed="0.1"
+        data-rotation="30"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 40%; right: 5%; transform: rotateZ(80deg)"
+        data-speed="0.15"
+        data-rotation="80"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 60%; left: 0%; transform: rotateZ(-50deg)"
+        data-speed="0.1"
+        data-rotation="-50"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 80%; right: 2%; transform: rotateZ(0deg)"
+        data-speed="0.15"
+        data-rotation="0"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 100%; left: 0%; transform: rotateZ(180deg)"
+        data-speed="0.1"
+        data-rotation="180"
+      />
+      <img
+        src="OLEElogo.png"
+        class="flying-logo"
+        style="top: 120%; right: 5%; transform: rotateZ(10deg)"
+        data-speed="0.15"
+        data-rotation="10"
+      />
+    </div>
 
+    <!-- Шапка -->
+    <header class="normal">
+      <h1>OLEE Vesti</h1>
+      <a href="index.html">
+        <img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo" />
+      </a>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="parent">
+      <div class="main">
+        <a href="index.html" class="link-back">← Nazad na glavnu</a>
+        <div id="list">Učitavanje...</div>
+      </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+      © <span id="year">2026</span> OLEE – Informativna stranica. Ova stranica
+      nije zvanični sajt sportskog kluba OLEE.
+    </footer>
+
+    <!-- Основной скрипт сайта -->
+    <script src="script.js"></script>
+
+    <!-- Коррекция заголовка h1 при скролле -->
+    <script>
+      const headerTitle = document.querySelector("header h1");
+      if (headerTitle) {
+        headerTitle.textContent = "OLEE Vesti";
+        window.addEventListener("scroll", () => {
+          headerTitle.textContent = "OLEE Vesti";
+        });
+      }
+    </script>
+
+    <!-- Загрузка новостей из Firebase -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import {
@@ -158,7 +243,7 @@
 
             let videoContent = "";
             if (i.videoHtml) {
-              videoContent = `<div class="video-container" style="margin-top:10px;" data-video="${encodeURIComponent(i.videoHtml)}"></div>`;
+              videoContent = `<div class="video-container" style="margin-top:12px;" data-video="${encodeURIComponent(i.videoHtml)}"></div>`;
             }
 
             div.innerHTML = `<div class="date">${i.date}</div><h2>${i.title}</h2><p>${i.text}</p>${videoContent}`;
@@ -175,14 +260,13 @@
             }
           });
         } catch (e) {
-          list.innerHTML = "Greška.";
+          list.innerHTML = "Greška pri učitavanju vesti.";
           console.error(e);
         }
       }
 
       load();
     </script>
-    <script async src="//www.instagram.com/embed.js"></script>
     <script async src="//www.instagram.com/embed.js"></script>
   </body>
 </html>

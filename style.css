@@ -257,7 +257,15 @@ h4 {
   opacity: 1;
   transform: translateY(0);
 }
-
+.link {
+  color: #ffbf00;
+}
+.link:visited {
+  color: #ff8000;
+}
+.link:hover {
+  color: #ff9900;
+}
 ul {
   padding-left: 20px;
 }
