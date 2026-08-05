@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="OLEElogo.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body id="header">
+  <body>
     <div class="parallax-bg">
       <img
         src="OLEElogo.png"
@@ -56,7 +56,7 @@
     <header class="normal">
       <h1>OLEE</h1>
 
-      <a href="#header"
+      <a href="#"
         ><img class="OLEElogo normalLogo" src="OLEElogo.png" alt="OLEE logo"
       /></a>
     </header>
@@ -153,26 +153,44 @@
             </button>
           </div>
         </div>
+
         <div class="block">
           <h2>Društvene mreže i kontakt</h2>
           <div class="block">
             <h3>Društvene mreže</h3>
             <p>
               Instagram:
-              <a href="https://www.instagram.com/clubolee"
+              <a href="https://www.instagram.com/clubolee" target="_blank"
                 >https://www.instagram.com/clubolee</a
               >
+              <button
+                class="copy"
+                data-copy="https://www.instagram.com/clubolee"
+              >
+                📋
+              </button>
             </p>
             <p>
               Facebook:
-              <a href="https://www.facebook.com/share/1NGV6yLhm6/"
-                >https://www.facebook.com/share/1NGV6yLhm6/
-              </a>
+              <a
+                href="https://www.facebook.com/share/1NGV6yLhm6/"
+                target="_blank"
+                >https://www.facebook.com/share/1NGV6yLhm6/</a
+              >
+              <button
+                class="copy"
+                data-copy="https://www.facebook.com/share/1NGV6yLhm6/"
+              >
+                📋
+              </button>
             </p>
           </div>
           <div class="block">
-            <h3>Kontakt</h3>
-            <p>+381 63 590 456</p>
+            <h3 style="margin-top: 15px">Kontakt</h3>
+            <p>
+              +381 63 590 456
+              <button class="copy" data-copy="+381 63 590 456">📋</button>
+            </p>
           </div>
         </div>
         <div class="block">
@@ -188,7 +206,7 @@
             </li>
             <li>
               Koliko traju treninzi?
-              <p>45–60 minuta, u zavisnosti od uzрasta.</p>
+              <p>45–60 minuta, u zavisnosti od uzrasta.</p>
             </li>
             <li>
               Mogu li deca probati pre upisa?
@@ -207,11 +225,6 @@
             <img src="Trener.png" alt="Trener" />
             <img src="decaRolere.png" alt="Deca sa rolerima" />
             <img src="superKamp.png" alt="Super Kamp" />
-            <!-- Модальное окно для галереи -->
-            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-              <span class="lightbox-close">&times;</span>
-              <img id="lightbox-img" src="" alt="Увеличенное фото" />
-            </div>
           </div>
         </div>
         <div class="block map" id="map">

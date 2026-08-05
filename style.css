@@ -101,15 +101,18 @@ input[type="file"] {
 html {
   scroll-behavior: smooth;
 }
+
 body {
   background-color: white;
   overflow-x: hidden;
 }
+
 .parent {
   display: flex;
   justify-content: center;
   padding: 0 10px;
 }
+
 .normal {
   width: 100%;
   position: fixed;
@@ -117,50 +120,64 @@ body {
   padding: 15px 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 .small {
   width: 100%;
   position: fixed;
   background-image: none;
   padding: 15px 10px;
 }
+
 header {
   height: 110px !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
+  padding-right: 25px !important;
   transition:
     padding 0.2s ease,
     background 0.3s ease;
 }
+
+/* Логотип и переходы */
 .OLEElogo {
   z-index: 9999;
   transition:
     max-width 0.2s ease,
-    transform 0.2s ease,
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    filter 0.3s ease,
     box-shadow 0.2s ease;
 }
+
 .OLEElogo.normalLogo {
   width: auto;
   max-width: 80px;
   height: auto;
 }
+
 .OLEElogo.smallLogo {
   width: auto;
   max-width: 50px;
 }
+
 .OLEElogo.normalLogo:hover {
   max-width: 90px !important;
 }
+
 .OLEElogo.smallLogo:hover {
   max-width: 56.25px;
 }
+
 .OLEElogo.normalLogo:active {
   max-width: 80px !important;
 }
+
 .OLEElogo.smallLogo:active {
+  transform: scale(0.95) rotate(0deg);
   max-width: 50px;
 }
+
 h1 {
   font-family: Arial, sans-serif;
   font-size: 40px;
@@ -169,16 +186,17 @@ h1 {
   transition: opacity 0.3s ease;
   margin-left: 15px;
 }
+
 footer {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgb(40, 40, 40);
   color: whitesmoke;
   width: 100%;
   padding: 10px;
   text-align: center;
   position: relative;
   z-index: 10;
-  background-color: rgb(40, 40, 40);
 }
+
 .main {
   color: black;
   display: flex;
@@ -193,8 +211,8 @@ footer {
   border-radius: 25px;
   position: relative;
   z-index: 2;
-  margin-top: 135px;
 }
+
 h2 {
   font-family: Arial, sans-serif;
   font-weight: 800;
@@ -202,6 +220,7 @@ h2 {
   color: #ffbf00;
   margin-bottom: 10px;
 }
+
 h3 {
   font-family: Arial, sans-serif;
   font-weight: 800;
@@ -209,6 +228,14 @@ h3 {
   color: #ffbf00;
   margin-bottom: 10px;
 }
+h4 {
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #ffbf00;
+  margin-bottom: 10px;
+}
+/* Блоки и анимация их появления */
 .block {
   width: 100%;
   margin-bottom: 20px;
@@ -217,31 +244,42 @@ h3 {
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-wrap: break-word;
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
   transition:
-    transform 0.2s ease,
+    opacity 0.6s ease,
+    transform 0.6s ease,
     box-shadow 0.2s ease;
 }
-.block:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+.block.show {
+  opacity: 1;
+  transform: translateY(0);
 }
+
 ul {
   padding-left: 20px;
 }
+
 li {
   margin-bottom: 10px;
 }
+
 li p {
   margin-top: 5px;
   margin-left: 10px;
   color: #333;
 }
+
 .block img {
   width: 100%;
   max-width: 300px;
   margin: 5px;
   border-radius: 10px;
 }
+
+/* Галерея */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -259,15 +297,19 @@ li p {
     box-shadow 0.2s ease;
   border: 1px solid #ccc;
 }
+
 .gallery img:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
+/* Комментарии */
 #comments-section {
   max-width: 600px;
   margin: 40px auto;
   font-family: Arial;
 }
+
 #comments-section input,
 #comments-section textarea {
   width: 100%;
@@ -275,6 +317,7 @@ li p {
   padding: 10px;
   border: #ccc solid 1px;
 }
+
 #comments-section button {
   display: flex;
   align-items: center;
@@ -286,13 +329,16 @@ li p {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 #comments-section button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
 .send {
   display: flex;
 }
+
 .comment {
   border: 1px solid #ccc;
   padding: 10px;
@@ -302,10 +348,12 @@ li p {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 .comment:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
 #load-more-btn {
   display: none;
   margin: 20px auto;
@@ -314,6 +362,7 @@ li p {
   border-radius: 10px;
   font-weight: bold;
 }
+
 #warning {
   color: red;
   font-weight: bold;
@@ -324,14 +373,17 @@ li p {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 #warning:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
 .imgBtn {
   width: 25px !important;
   margin: 0px 10px 0px 0px !important;
 }
+
 iframe {
   border-radius: 10px;
   border: 1px solid #ccc !important;
@@ -339,11 +391,13 @@ iframe {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 iframe:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
+/* Параллакс логотипы */
 .parallax-bg {
   position: fixed;
   top: 0;
@@ -354,76 +408,91 @@ iframe:hover {
   z-index: 1;
   overflow: hidden;
 }
+
 .flying-logo {
   position: absolute;
   width: 80px;
   opacity: 0.55;
   will-change: transform;
 }
+
 @media (max-width: 1030px) {
   .flying-logo {
     width: 30px;
   }
 }
+
+/* Новости */
 .news-item {
   border-left: 2px solid #ccc;
   border-right: 2px solid #ccc;
   padding: 7px;
-  font: Arial;
+  font-family: Arial, sans-serif;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 .news-item:first-child {
   border: 2px solid #ccc !important;
   border-bottom: none !important;
   border-radius: 10px 10px 0px 0px !important;
 }
+
 .news-item:last-child {
   border: 2px solid #ccc;
   border-top: none;
   border-radius: 0px 0px 10px 10px;
 }
+
 .news-title {
   font-weight: bold;
   color: #ffbf00;
   font-size: 30px;
   margin-top: 10px;
 }
+
 .news-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
 .news {
   font-size: 30px !important;
   color: #ff8000;
 }
+
 #news {
   height: auto;
   padding-bottom: 5px;
   border-radius: 10px;
 }
+
 .video-container .instagram-media {
   margin: 10px auto !important;
   position: relative !important;
   min-width: 200px !important;
 }
+
 .video-container iframe:not(.instagram-media) {
   width: 560px;
   height: 315px;
   max-width: 100%;
   border-radius: 10px;
 }
+
 .news-olee-item {
   border: 2px solid #ccc !important;
   border-radius: 10px;
   padding: 7px;
   transition: all 0.2s ease;
 }
+
 .news-olee-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
 .oleeNewsBtn {
   background-color: #ffbf00;
   border: 2px grey solid;
@@ -431,15 +500,23 @@ iframe:hover {
   padding: 5px 10px;
   transition: all 0.2s ease;
 }
+
 .oleeNewsBtn:hover {
   transform: translateY(-1px);
 }
+
 .oleeNewsBtn:active {
   transform: translateY(0px);
 }
+
 .oleeNewsLink {
   color: black;
   text-decoration: none;
+}
+
+/* Слайдер */
+.olee-slider-wrapper {
+  position: relative;
 }
 
 .olee-slider {
@@ -474,6 +551,7 @@ iframe:hover {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 @media (max-width: 450px) {
   .olee-slide {
     padding: 18px 10px;
@@ -483,11 +561,13 @@ iframe:hover {
     height: 6px;
   }
 }
+
 @media (max-width: 600px) {
   .slider-btn {
     display: none !important;
   }
 }
+
 .olee-slide:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
@@ -511,10 +591,7 @@ iframe:hover {
   line-height: 1.5;
 }
 
-header {
-  padding-right: 25px !important;
-}
-
+/* Кастомный Скроллбар */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -566,6 +643,7 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
     transform 0.2s ease,
     background-color 0.2s ease;
 }
+
 #whyOLEE:hover .slider-btn {
   display: flex;
 }
@@ -586,20 +664,17 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
 .slider-btn:active {
   transform: translateY(-50%) scale(0.95);
 }
-.olee-slider-wrapper {
-  position: relative; /* Теперь 50% высоты будет считаться ОТ СЛАЙДЕРА, а не от всей страницы */
-}
-/* --- FAQ (мягкий стиль без грубых рамок) --- */
 
+/* FAQ (Вопросы и ответы) */
 .block ul {
   list-style: none;
   padding-left: 0;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa; /* Мягкая светлая подложка */
+  background-color: #fafafa;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #f0f0f0; /* Едва заметный нежный контур */
+  border: 1px solid #f0f0f0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
@@ -609,7 +684,7 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
   padding: 14px 16px 14px 38px;
   background-color: transparent;
-  border-bottom: 1px solid #f0f0f0; /* Мягкая незаметная линия между вопросами */
+  border-bottom: 1px solid #f0f0f0;
   font-weight: bold;
   color: #222;
   user-select: none;
@@ -620,17 +695,10 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   border-bottom: none;
 }
 
-/* При наведении — пункт слегка подсвечивается */
-.block ul li:hover {
-  background-color: #f2f2f2;
-}
-
-/* Открытый пункт становится полностью белым */
 .block ul li.active {
   background-color: #ffffff;
 }
 
-/* Оранжевая стрелочка */
 .block ul li::after {
   content: "❯";
   position: absolute;
@@ -645,7 +713,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   transform: rotate(90deg);
 }
 
-/* Ответ внутри */
 .block ul li p {
   display: none;
   margin-top: 10px;
@@ -658,4 +725,113 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
 
 .block ul li.active p {
   display: block;
+}
+
+/* Кнопка копирования */
+.copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+}
+
+.copy:hover {
+  background-color: #ffbf00;
+  border-color: #ffbf00;
+  transform: scale(1.1);
+}
+
+.copy:active {
+  transform: scale(0.95);
+}
+
+/* Мобильные фиксы и ховеры для компьютеров */
+.block ul li,
+.copy,
+.OLEElogo,
+.gallery img,
+.lightbox {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  /* Красивое свечение применится ТОЛЬКО к маленькому логотипу */
+  .OLEElogo.smallLogo:hover {
+    transform: scale(1.12) rotate(6deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 18px rgba(255, 191, 0, 0.8));
+  }
+
+  .block.show:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .block ul li:hover {
+    background-color: #f2f2f2;
+  }
+}
+/* Полный сброс рамки и выделения при клике на логотип и его ссылку */
+header a,
+.OLEElogo,
+.OLEElogo:focus,
+.OLEElogo:active {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  user-select: none !important;
+}
+/* --- Интерактивные карточки соцсетей --- */
+.social-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.social-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background-color: #ffffff;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-icon {
+  font-size: 20px;
+}
+
+/* Ховер приподнимает карточку и даёт оранжевую рамку */
+@media (hover: hover) {
+  .social-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #ffbf00;
+    color: #000;
+  }
+}
+
+.social-card:active {
+  transform: translateY(0);
 }

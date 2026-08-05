@@ -5,6 +5,7 @@ const newsBtn = document.querySelector(".newsBtn");
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Логика шапки при скролле
 window.addEventListener("scroll", function () {
   if (window.scrollY > 10) {
     document.body.classList.add("scrolled");
@@ -31,6 +32,27 @@ window.addEventListener("scroll", function () {
     item.style.transform = `translateY(${yPos}px) rotateZ(${rotation}deg)`;
   });
 });
+
+// Анимация появления блоков при скролле (оптимизировано под ПК и мобилки)
+const blockObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  {
+    threshold: 0.05,
+    rootMargin: "0px 0px 50px 0px",
+  }
+);
+
+document.querySelectorAll(".block").forEach((block) => {
+  blockObserver.observe(block);
+});
+
+// Прокрутка слайдера
 function slideLeft() {
   document
     .querySelector(".olee-slider")
@@ -42,10 +64,27 @@ function slideRight() {
     .querySelector(".olee-slider")
     .scrollBy({ left: 280, behavior: "smooth" });
 }
-// --- 1. Логика FAQ (Аккордеон) ---
+
+// 1. Логика FAQ (Аккордеон)
 document.querySelectorAll(".block ul li").forEach((item) => {
   item.addEventListener("click", () => {
-    // Переключаем класс active при клике на вопрос
     item.classList.toggle("active");
+  });
+});
+
+// 2. Копирование текста по клику на .copy
+document.querySelectorAll(".copy").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const textToCopy =
+      btn.getAttribute("data-copy") ||
+      btn.parentElement.innerText.replace("📋", "").replace("✅", "").trim();
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const originalIcon = btn.innerHTML;
+      btn.innerHTML = "✅";
+      setTimeout(() => {
+        btn.innerHTML = originalIcon;
+      }, 1500);
+    });
   });
 });
