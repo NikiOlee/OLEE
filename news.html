@@ -22,6 +22,7 @@
         position: fixed;
         background-image: none;
         padding: 15px 10px;
+        color: transparent;
       }
       .main {
         background-color: rgb(230, 230, 230);
@@ -156,10 +157,14 @@
     <!-- Коррекция заголовка h1 при скролле -->
     <script>
       const headerTitle = document.querySelector("header h1");
+
       if (headerTitle) {
-        headerTitle.textContent = "OLEE Vesti";
         window.addEventListener("scroll", () => {
-          headerTitle.textContent = "OLEE Vesti";
+          if (window.scrollY > 10) {
+            headerTitle.textContent = "";
+          } else {
+            headerTitle.textContent = "OLEE Vesti";
+          }
         });
       }
     </script>
