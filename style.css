@@ -289,28 +289,34 @@ li p {
 
 /* Галерея */
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* На телефоне: 2 в ряд */
   gap: 10px;
-  justify-content: center;
 }
 
 .gallery img {
   width: 100%;
-  max-width: 300px;
-  object-fit: cover;
-  border-radius: 10px;
+  aspect-ratio: 1 / 1; /* Делает ВСЕ карточки идеально квадратными */
+  object-fit: cover; /* Заполняет весь квадрат картинкой */
+  border-radius: 12px;
+  border: 1px solid #ccc;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  border: 1px solid #ccc;
 }
 
 .gallery img:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Для больших экранов (компьютеров) */
+@media (min-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr); /* На ПК: 3 в ряд */
+    gap: 15px;
+  }
+}
 /* Комментарии */
 #comments-section {
   max-width: 600px;
