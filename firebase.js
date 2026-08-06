@@ -156,8 +156,8 @@ async function displayClubNews() {
 async function displaySiteNews() {
   const container = document.getElementById("news-container");
   try {
-    const q = query(collection(siteDb, "news"), orderBy("date", "desc"));
-    const snapshot = await getDocs(q);
+    // Берем все новости без сортировки на стороне Firebase, чтобы он не путал строки
+    const snapshot = await getDocs(collection(siteDb, "news"));
 
     container.innerHTML = "";
     if (snapshot.empty) {
@@ -165,10 +165,46 @@ async function displaySiteNews() {
       return;
     }
 
+    let items = [];
     snapshot.forEach((doc) => {
-      const data = doc.data();
-      const dateValue = isNaN(data.date) ? data.date : Number(data.date);
-      const d = new Date(dateValue).toLocaleDateString("sr-RS");
+      items.push({ id: doc.id, ...doc.data() });
+    });
+
+    // Функция, которая разбирает дату "06. 08. 2026." в точное время в миллисекундах
+    const getTimestamp = (d) => {
+      if (!d) return 0;
+
+      if (!isNaN(d)) {
+        return Number(d);
+      }
+
+      if (typeof d === "object" && typeof d.toMillis === "function") {
+        return d.toMillis();
+      }
+
+      if (typeof d === "string") {
+        const cleanStr = d.trim().replace(/\.$/, ""); 
+        const parts = cleanStr.split(".").map((p) => p.trim());
+
+        if (parts.length >= 3) {
+          const day = parseInt(parts[0], 10);
+          const month = parseInt(parts[1], 10) - 1;
+          const year = parseInt(parts[2], 10);
+          return new Date(year, month, day).getTime();
+        }
+
+        return new Date(d).getTime() || 0;
+      }
+
+      return 0;
+    };
+
+    // Сортируем в JS: от самых свежих к старым
+    items.sort((a, b) => getTimestamp(b.date) - getTimestamp(a.date));
+
+    items.forEach((data) => {
+      // Берем дату из базы напрямую, чтобы сохранились нули (например "06. 08. 2026.")
+      const d = data.date || "";
 
       let videoContent = "";
       if (data.videoHtml && data.videoHtml.trim() !== "") {
@@ -191,7 +227,6 @@ async function displaySiteNews() {
       container.appendChild(newsDiv);
     });
 
-    // if (window.instgrm) { window.instgrm.Embeds.process(); }
   } catch (e) {
     console.error("Ошибка Firebase:", e);
     container.innerHTML = "<p>Greška pri učitavanju vesti sajta.</p>";
