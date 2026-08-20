@@ -140,7 +140,6 @@ header {
     background 0.3s ease;
 }
 
-/* Логотип и переходы */
 .OLEElogo {
   z-index: 9999;
   transition:
@@ -235,7 +234,7 @@ h4 {
   color: #ffbf00;
   margin-bottom: 10px;
 }
-/* Блоки и анимация их появления */
+
 .block {
   width: 100%;
   margin-bottom: 20px;
@@ -287,17 +286,16 @@ li p {
   border-radius: 10px;
 }
 
-/* Галерея */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* На телефоне: 2 в ряд */
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
 .gallery img {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Делает ВСЕ карточки идеально квадратными */
-  object-fit: cover; /* Заполняет весь квадрат картинкой */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 12px;
   border: 1px solid #ccc;
   transition:
@@ -310,14 +308,13 @@ li p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Для больших экранов (компьютеров) */
 @media (min-width: 600px) {
   .gallery {
-    grid-template-columns: repeat(3, 1fr); /* На ПК: 3 в ряд */
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
   }
 }
-/* Комментарии */
+
 #comments-section {
   max-width: 600px;
   margin: 40px auto;
@@ -397,8 +394,20 @@ li p {
   width: 25px !important;
   margin: 0px 10px 0px 0px !important;
 }
+@media (min-width: 700px) {
+  .maps {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+}
 
 iframe {
+  flex: 1 1 0%;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
   border-radius: 10px;
   border: 1px solid #ccc !important;
   transition:
@@ -411,7 +420,6 @@ iframe:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Параллакс логотипы */
 .parallax-bg {
   position: fixed;
   top: 0;
@@ -436,7 +444,6 @@ iframe:hover {
   }
 }
 
-/* Новости */
 .news-item {
   border-left: 2px solid #ccc;
   border-right: 2px solid #ccc;
@@ -528,7 +535,6 @@ iframe:hover {
   text-decoration: none;
 }
 
-/* Слайдер */
 .olee-slider-wrapper {
   position: relative;
 }
@@ -605,7 +611,6 @@ iframe:hover {
   line-height: 1.5;
 }
 
-/* Кастомный Скроллбар */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -679,7 +684,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   transform: translateY(-50%) scale(0.95);
 }
 
-/* FAQ (Вопросы и ответы) */
 .block ul {
   list-style: none;
   padding-left: 0;
@@ -741,7 +745,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   display: block;
 }
 
-/* Кнопка копирования */
 .copy {
   display: inline-flex;
   align-items: center;
@@ -767,7 +770,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
   transform: scale(0.95);
 }
 
-/* Мобильные фиксы и ховеры для компьютеров */
 .block ul li,
 .copy,
 .OLEElogo,
@@ -777,7 +779,6 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
 }
 
 @media (hover: hover) {
-  /* Красивое свечение применится ТОЛЬКО к маленькому логотипу */
   .OLEElogo.smallLogo:hover {
     transform: scale(1.12) rotate(6deg);
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
@@ -793,7 +794,7 @@ body.scrolled::-webkit-scrollbar-thumb:hover {
     background-color: #f2f2f2;
   }
 }
-/* Полный сброс рамки и выделения при клике на логотип и его ссылку */
+
 header a,
 .OLEElogo,
 .OLEElogo:focus,
@@ -806,7 +807,7 @@ header a,
   background: transparent !important;
   user-select: none !important;
 }
-/* --- Интерактивные карточки соцсетей --- */
+
 .social-links {
   display: flex;
   gap: 12px;
@@ -836,7 +837,6 @@ header a,
   font-size: 20px;
 }
 
-/* Ховер приподнимает карточку и даёт оранжевую рамку */
 @media (hover: hover) {
   .social-card:hover {
     transform: translateY(-3px);
