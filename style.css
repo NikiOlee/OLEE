@@ -474,7 +474,21 @@ iframe:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+@media (max-width: 768px) {
+  .maps-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки вместо одной */
+    gap: 10px;
+  }
 
+  .map-wrapper iframe {
+    height: 140px; /* Компактная карта */
+  }
+
+  .location-card h3 {
+    font-size: 14px;
+  }
+}
 .news {
   font-size: 30px !important;
   color: #ff8000;
